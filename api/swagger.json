@@ -1,0 +1,179 @@
+{
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "Gera pdf através de html\r\n",
+        "title": "payroll-loan.html2pdf",
+        "contact": {},
+        "version": "1.0"
+    },
+    "basePath": "/",
+    "paths": {
+        "/healthcheck": {
+            "get": {
+                "description": "Check API health",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Health"
+                ],
+                "summary": "Check API health",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetHealthCheckResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/html2pdf": {
+            "post": {
+                "description": "Retrieve the pdf file of a html",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "HTML PDF"
+                ],
+                "summary": "API Convert html to pdf",
+                "parameters": [
+                    {
+                        "description": "The input HtmlRequest struct",
+                        "name": "Request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.HtmlRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.BaseResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.BaseResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "controllers.GetHealthCheckResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "dtos.BaseResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dtos.Error"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                },
+                "result": {},
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "dtos.Error": {
+            "type": "object",
+            "properties": {
+                "detail": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "dtos.HtmlRequest": {
+            "type": "object",
+            "required": [
+                "content"
+            ],
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "displayHeaderFooter": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "footerTemplate": {
+                    "type": "string"
+                },
+                "headerTemplate": {
+                    "type": "string"
+                },
+                "landscape": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "marginBottom": {
+                    "type": "number",
+                    "default": 1
+                },
+                "marginLeft": {
+                    "type": "number",
+                    "default": 1
+                },
+                "marginRight": {
+                    "type": "number",
+                    "default": 0
+                },
+                "marginTop": {
+                    "type": "number",
+                    "default": 1
+                },
+                "paperHeight": {
+                    "type": "number",
+                    "default": 11.69
+                },
+                "paperWidth": {
+                    "type": "number",
+                    "default": 8.27
+                },
+                "preferCSSPageSize": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "printBackground": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "withScale": {
+                    "type": "number",
+                    "default": 0.57
+                }
+            }
+        }
+    }
+}

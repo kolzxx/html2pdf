@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  air:
+    build:
+      context: .
+      args:
+        version: development
+      target: development
+    command: [ "air", "-c", ".air.toml" ]
+    ports:
+      - ${PORT}:${PORT}
+    env_file:
+      - .env
+    volumes:
+      - ./:/app/
+    environment:
+      GIN_MODE: debug
+      SWAGGER_ENABLED: true
