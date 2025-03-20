@@ -1,4 +1,4 @@
-FROM 372349696520.dkr.ecr.us-west-2.amazonaws.com/docker-hub/library/golang:1.23.4-bookworm as build
+FROM docker-hub/library/golang:1.23.4-bookworm as build
 
 ARG version
 
@@ -14,7 +14,7 @@ COPY . .
 RUN make build VERSION=$version
 
 
-FROM 372349696520.dkr.ecr.us-west-2.amazonaws.com/docker-hub/chromedp/headless-shell:127.0.6533.120 as navigator
+FROM docker-hub/chromedp/headless-shell:127.0.6533.120 as navigator
 
 WORKDIR /app
 
